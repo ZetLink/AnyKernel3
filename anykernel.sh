@@ -4,21 +4,26 @@
 ### AnyKernel setup
 # global properties
 properties() { '
-kernel.string=DanceKernek by ZetLink
+kernel.string=Test Kernel by ZetLink
 do.devicecheck=1
-do.modules=1
-do.systemless=0
-do.cleanup=1
+do.modules=0
+do.systemless=1
+do.cleanup=0
 do.cleanuponabort=0
-device.name1=devon
+device.name1=rhode
 device.name2=hawao
-device.name3=rhode
-supported.versions=15
+device.name3=devon
+supported.versions=
 supported.patchlevels=
 supported.vendorpatchlevels=
-'; } # end properties
+'; }
 
-block=/dev/block/bootdevice/by-name/boot;Add commentMore actions
+boot_attributes() {
+set_perm_recursive 0 0 755 644 $RAMDISK/*;
+set_perm_recursive 0 0 750 750 $RAMDISK/init* $RAMDISK/sbin;
+}
+
+block=/dev/block/by-name/boot;
 is_slot_device=1;
 ramdisk_compression=auto;
 patch_vbmeta_flag=auto;
